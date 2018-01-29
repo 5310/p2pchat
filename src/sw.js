@@ -1,5 +1,3 @@
-console.log(3213212)
-
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('index')
