@@ -1,5 +1,8 @@
 ### Personal ###
 
+# Parcel
+.cache
+
 # Temporary
 .psc-cache
 .pulp-cache
