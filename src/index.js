@@ -1,18 +1,20 @@
 import libp2pInit from './libp2p/init.js'
 
-// Initialize app;
+// Initialization:
 document.onreadystatechange = async function () {
   if (document.readyState === 'interactive' || document.readyState === 'complete') {
     document.onreadystatechange = () => {}
-
     window.node = await libp2pInit()
   }
 }
 
-// Redirect to secure
-if (location.protocol === 'http:' && document.location.host.split(':')[0] !== 'localhost') location.protocol = 'https:'
+// Redirect to secure:
+if (
+  location.protocol === 'http:' &&
+  document.location.host.split(':')[0] !== 'localhost'
+) location.protocol = 'https:'
 
-// Setup service worker:
+// Setup Service Worker:
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js')
     .then(reg => console.log('Service Worker registered', reg))
