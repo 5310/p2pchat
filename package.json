@@ -23,6 +23,6 @@
     "dev": "parcel src/index.html",
     "cachelist": "ls -1 dist | sed 's\/^\/  \"\/g' | sed 's\/$\/\"\/g' | sed '1s\/^\/[\\n\/;$!s\/$\/,\/;$s\/$\/\\n]\/' > dist/cachelist.json",
     "build": "rm -rf dist/* && parcel build --no-minify --public-url / src/index.html && yarn cachelist",
-    "deploy": "surge -p dist"
+    "deploy": "surge -p dist -d p2pchat.surge.sh"
   }
 }
