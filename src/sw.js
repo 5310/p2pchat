@@ -1,26 +1,21 @@
-const CACHEBUST = true
+console.log(3213212)
 
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open('index').then(cache => {
-      return cache.addAll([
-        '_assets/favicon/512.png',
-        '_assets/favicon/192.png',
-        '_assets/favicon/144.png',
-        '_assets/favicon/32.png',
-        '_assets/favicon/16.png',
-        'index.html',
-        'index.css',
-        'index.js',
-      ].map(r => CACHEBUST ? r + '?' + Math.random() : r))
-    })
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('index')
+      .then((cache) => fetch('cachelist.json')
+        .then((response) => response.json())
+        .then((files) => cache.addAll(files))
+      )
+      .then(() => console.debug('Service Worker installed.'))
+      .then(() => self.skipWaiting())
   )
 })
 
-self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request)
-    })
-  )
-})
+self.addEventListener('fetch', (event) => event.respondWith(
+  caches
+    .match(event.request)
+    .then((response) => response || fetch(event.request))
+))
+
+self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()))
