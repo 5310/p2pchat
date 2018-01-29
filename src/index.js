@@ -10,7 +10,7 @@ document.onreadystatechange = async function () {
 }
 
 // Redirect to secure
-// if (location.protocol === 'http:') location.protocol = 'https:' //DEBUG: Don't use with Parcel's HMR!
+if (location.protocol === 'http:' && document.location.host.split(':')[0] !== 'localhost') location.protocol = 'https:'
 
 // Setup service worker:
 if ('serviceWorker' in navigator) {
