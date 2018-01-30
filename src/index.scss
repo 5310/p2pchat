@@ -56,6 +56,9 @@ a {
 
 #app {
   
+  width: 100vw;
+  height: 100vh;
+  
   .app__id {
     font-family: 'Roboto Mono', monospace
   }
@@ -71,9 +74,17 @@ a {
       @media screen and (max-width: 1024px) {
         padding: 16px;
       }
+      .app__avatar {
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem 0;
+      }
       .app__id {
         width: 100%;
         overflow-wrap: break-word;
+      }
+      .app__peercount {
+        margin-top: 0.5rem;
       }
     }
     
@@ -100,6 +111,12 @@ a {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
+      // min-height: 100%;
+      
+      & > * {
+        flex-shrink: 0;
+      }
       
       p {
         margin-bottom: 0.5em;
@@ -163,7 +180,8 @@ a {
       
       background: var(--color-darkest);
       color: var(--color-lightest);
-      border-bottom: 1px solid var(--color-dark);
+      border: solid var(--color-dark);
+      border-width: 1px 0;
       
       input {
         border: none;

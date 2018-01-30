@@ -24,6 +24,8 @@ html(lang='en')
     noscript
       p This app needs JavaScript to work.
       
+    aside#app-init
+      
     main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
       
       header.app-header.mdl-layout__header
@@ -40,14 +42,17 @@ html(lang='en')
 
       aside.app-drawer.mdl-layout__drawer        
         header.app-profile.mdl-navigation__link
-          .app__id.mdl-layout-title QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav          
+          img.app__avatar(src='')
+          .app__id.mdl-layout-title QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
+          .app__peercount Peers: 42
         main.app-channels
           nav.app-channels.mdl-navigation
             a.mdl-navigation__link.active(href='', data-app-channel-name='channel-a') #channel-a
             a.mdl-navigation__link(href='', data-app-channel-name='lane-b') #lane-b
             a.mdl-navigation__link(href='', data-app-channel-name='canal-c') #canal-c
             a.mdl-navigation__link(href='', data-app-channel-name='frame-d') #frame-d
-            a#app-channel-join.mdl-navigation__link(href='') Join Channel
+            a#app-channel-join.mdl-navigation__link(href='') Join Channel 
+              i.material-icons add_circle
         .mdl-layout-spacer          
         footer
           nav.mdl-navigation
