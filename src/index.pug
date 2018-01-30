@@ -92,7 +92,7 @@ html(lang='en')
         aside.app-info(style='display: none;')
           p Please <a id='app-channel-join--text' class='mdl-navigation__link' href=''>join a channel</a> to get started.
           
-        dialog#app-channel-dialog.mdl-dialog
+        dialog#app-channel-join-dialog.mdl-dialog
           h3.mdl-dialog__title Join a Channel
           .mdl-dialog__content
             p If no channel with the given name and key exists yet one will be created for you.
@@ -107,6 +107,15 @@ html(lang='en')
             .mdl-dialog__actions
               button#app-channel-join-ok.mdl-button(type='button') Join
               button.mdl-button.close(type='button') Cancel
+              
+        dialog#app-channel-qrcode-dialog.mdl-dialog
+          h3.mdl-dialog__title Share a Channel
+          .mdl-dialog__content
+            p Scan the QR Code or visit the URL and enter the key to join.
+            img.app__qrcode
+            p https://p2pchat.surge.sh/?c=channel-a
+            .mdl-dialog__actions
+              button.mdl-button.close(type='button') Done
               
     script
       | const dialog = document.querySelector('#app-channel-dialog');
