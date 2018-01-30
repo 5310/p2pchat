@@ -16,7 +16,7 @@ html(lang='en')
   link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
     
   title P2Pchat
-  link(rel='stylesheet', href='./index.css')
+  link(rel='stylesheet', href='./index.scss')
   script(type='module', src='./index.js')
     
   body
@@ -24,58 +24,103 @@ html(lang='en')
     noscript
       p This app needs JavaScript to work.
       
-    main#app-content.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+    main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
       
-      header.mdl-layout__header
+      header.app-header.mdl-layout__header
         .mdl-layout__header-row
-          span.app__channel-name.mdl-layout-title test-channel
+          span.app__channel-name.mdl-layout-title #channel-a
           .mdl-layout-spacer
           nav.mdl-navigation
             button#app-link-channel.mdl-button.mdl-js-button.mdl-button--icon
               i.material-icons link
-            button#app-qrcode-channel.mdl-button.mdl-js-button.mdl-button--icon
-              i.material-icons share
           button#app-channel-menu.mdl-button.mdl-js-button.mdl-button--icon
             i.material-icons more_vert
           ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='app-channel-menu')
-            li.mdl-menu__item Leave
+            li#app-channel-leave.mdl-menu__item Leave
 
-            
-      aside.mdl-layout__drawer        
-        header.app-profile.mdl-layout-title 
-          span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav          
+      aside.app-drawer.mdl-layout__drawer        
+        header.app-profile.mdl-navigation__link
+          .app__id.mdl-layout-title QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav          
         main.app-channels
           nav.app-channels.mdl-navigation
-            a.mdl-navigation__link(href='') channel-a
-            a.mdl-navigation__link(href='') lane-b
-            a.mdl-navigation__link(href='') canal-c
-            a.mdl-navigation__link(href='') frame-d
-            a.mdl-navigation__link(href='') add channel            
+            a.mdl-navigation__link.active(href='', data-app-channel-name='channel-a') #channel-a
+            a.mdl-navigation__link(href='', data-app-channel-name='lane-b') #lane-b
+            a.mdl-navigation__link(href='', data-app-channel-name='canal-c') #canal-c
+            a.mdl-navigation__link(href='', data-app-channel-name='frame-d') #frame-d
+            a#app-channel-join.mdl-navigation__link(href='') Join Channel
+        .mdl-layout-spacer          
         footer
           nav.mdl-navigation
-            a.mdl-navigation__link(href='') about
+            a.mdl-navigation__link(href='') About
             
-      main.mdl-layout__content
-        //- .app-chat
-        //-   img.app__avatar
-        //-   h1.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
-        //-   p.app-chat__content hullo world
-        //- .app-chat
-        //-   img.app__avatar
-        //-   h1.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
-        //-   p.app-chat__content hullo world
-        //-   p.app-chat__content hullo world
-        //-   p.app-chat__content hullo world
-        //- .chat.own
-        //-   p.app-chat__content hullo world
-        //- .chat.own
-        //-   p.app-chat__content hullo world
-        //-   p.app-chat__content hullo world
-        //-   p.app-chat__content hullo world
+      main.app-content.mdl-layout__content
+        
+        main.app-chats
+          .mdl-layout-spacer
+          .app-chat
+            img.app__avatar(src='')
+            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
+              span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
+              p.app-chat__content hullo world main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
+          .app-chat
+            img.app__avatar(src='')
+            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
+              span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
+              p.app-chat__content hullo world
+              p.app-chat__content hullo world
+              p.app-chat__content hullo world
+          .app-chat.own
+            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
+              p.app-chat__content hullo world
+          .app-chat.own
+            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
+              p.app-chat__content hullo world hullo worldhullo worldhullohullo worldhullo worldhullo worldhullo worldhullo worldhullo worldhullo worldhullo world
+              p.app-chat__content hullo world
+              p.app-chat__content hullo world
+
+        footer.app-post.mdl-layout__header-row
+          .mdl-textfield.mdl-js-textfield
+            input#app-post-input.mdl-textfield__input(type='text')
+            label.mdl-textfield__label(for='app-chat-input') Post...
+          button#app-post-send.mdl-button.mdl-js-button.mdl-button--icon
+            i.material-icons send
+    
+        aside.app-info(style='display: none;')
+          p Please <a id='app-channel-join--text' class='mdl-navigation__link' href=''>join a channel</a> to get started.
           
-      //- footer
-      //-   textfield#chat-input
-      //-   button#chat-send
+        dialog#app-channel-dialog.mdl-dialog
+          h3.mdl-dialog__title Join a Channel
+          .mdl-dialog__content
+            p If no channel with the given name and key exists yet one will be created for you.
+            form(action='#')
+              .mdl-textfield.mdl-js-textfield
+                input#app-channel-name.mdl-textfield__input(type='text')
+                label.mdl-textfield__label(for='app-channel-name') Name...
+              .mdl-textfield.mdl-js-textfield
+                input#app-channel-key.mdl-textfield__input(type='password')
+                label.mdl-textfield__label(for='app-channel-key') Key...
+              input.submit(type='submit', style='display: none')
+            .mdl-dialog__actions
+              button#app-channel-join-ok.mdl-button(type='button') Join
+              button.mdl-button.close(type='button') Cancel
+              
+    script
+      | const dialog = document.querySelector('#app-channel-dialog');
+      | const button = document.querySelector('#app-channel-join');
+      | const button2 = document.querySelector('#app-channel-join--text');
+      | if (! dialog.showModal) {
+      |  dialogPolyfill.registerDialog(dialog);
+      | }
+      | button.addEventListener('click', (ev) => {
+      |   dialog.showModal()
+      |   ev.preventDefault()
+      | })
+      | button2.addEventListener('click', (ev) => {
+      |   dialog.showModal()
+      |   ev.preventDefault()
+      | })
+      | dialog.querySelector('.close').addEventListener('click', () => dialog.close())
+      | dialog.querySelector('.submit').addEventListener('click', () => dialog.close())
       
     #app-debug
       .node
