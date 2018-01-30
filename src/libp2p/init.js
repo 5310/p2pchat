@@ -11,7 +11,7 @@ export default async function init () {
 
     // DEBUG: Mock
     const $id = document.createTextNode('Node is ready. ID: ' + idStr)
-    document.querySelector('#debug .node').append($id)
+    document.querySelector('#debug .debug__node').append($id)
     const channel = 'test'
     node.pubsub.subscribe(channel)
     node.pubsub.on(channel, (msg) => console.log(msg.from, msg.data.toString()))
@@ -32,7 +32,7 @@ export default async function init () {
     const $connPeer = document.createElement('div')
     $connPeer.innerHTML = 'Connected to: ' + idStr
     $connPeer.id = idStr
-    document.querySelector('#debug .peers').append($connPeer)
+    document.querySelector('#debug .debug__peers').append($connPeer)
   })
   node.on('peer:disconnect', (peerInfo) => {
     const idStr = peerInfo.id.toB58String()

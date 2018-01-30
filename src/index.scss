@@ -17,6 +17,10 @@ noscript {
   --color-error: tomato;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
   line-height: 2.5rem;
@@ -34,9 +38,7 @@ a {
   color: inherit;
 }
 
-#app-debug {
-  display: none;
-}
+
   
 .mdl-layout__header {
   background: var(--color-lightest);
@@ -52,6 +54,31 @@ a {
 
 .mdl-layout__drawer {
   border: none;
+}
+
+#debug {
+  position: absolute;
+  z-index: 800;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-lightest);
+  color: var(--color-medium);
+  padding: 1rem;
+}
+
+#libp2p {
+  position: absolute;
+  z-index: 700;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-lightest);
+  color: var(--color-medium);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 #app {

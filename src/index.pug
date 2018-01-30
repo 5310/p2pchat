@@ -24,8 +24,14 @@ html(lang='en')
     noscript
       p This app needs JavaScript to work.
       
-    aside#app-init
-      
+    aside#debug(style='display: none')
+      p.debug__node
+      p.debug__peers
+
+    aside#libp2p(style='display: none')
+      p.libp2p__status Initializing libp2p node
+      #libp2p-progress.mdl-progress.mdl-js-progress.mdl-progress__indeterminate
+
     main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
       
       header.app-header.mdl-layout__header
@@ -40,11 +46,13 @@ html(lang='en')
           ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='app-channel-menu')
             li#app-channel-leave.mdl-menu__item Leave
 
-      aside.app-drawer.mdl-layout__drawer        
+      aside.app-drawer.mdl-layout__drawer
+        
         header.app-profile.mdl-navigation__link
           img.app__avatar(src='')
           .app__id.mdl-layout-title QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
           .app__peercount Peers: 42
+        
         main.app-channels
           nav.app-channels.mdl-navigation
             a.mdl-navigation__link.active(href='', data-app-channel-name='channel-a') #channel-a
@@ -52,7 +60,9 @@ html(lang='en')
             a.mdl-navigation__link(href='', data-app-channel-name='canal-c') #canal-c
             a.mdl-navigation__link(href='', data-app-channel-name='frame-d') #frame-d
             a#app-channel-join.mdl-navigation__link(href='') Join Channel
-        .mdl-layout-spacer          
+        
+        .mdl-layout-spacer   
+               
         footer
           nav.mdl-navigation
             a.mdl-navigation__link(href='') About
@@ -134,7 +144,3 @@ html(lang='en')
       | })
       | dialog.querySelector('.close').addEventListener('click', () => dialog.close())
       | dialog.querySelector('.submit').addEventListener('click', () => dialog.close())
-      
-    #app-debug
-      .node
-      .peers
