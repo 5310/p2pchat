@@ -146,13 +146,13 @@ a {
         &.own {
           
           min-width: 10%;
-          margin: 0 0.5rem 1rem 3rem;
+          margin: 0 0.75rem 1rem 3rem;
           
           display: flex;
           
           @media screen and (max-width: 1024px) {
             justify-content: flex-end;
-            margin-left: 0.5rem;
+            margin-left: 0.75rem;
             p {
               text-align: right;
             }
