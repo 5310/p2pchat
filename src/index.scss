@@ -1,0 +1,192 @@
+noscript {
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  color: black;
+}
+
+:root {
+  --color-lightest: white;
+  --color-light: #eee;
+  --color-medium: #aaa;
+  --color-dark: #444;
+  --color-darkest: black;
+  --color-okay: forestgreen;
+  --color-warning: goldenrod;
+  --color-error: tomato;
+}
+
+html {
+  font-size: 16px;
+  line-height: 2.5rem;
+  background: var(--color-bg-lightest);
+  color: var(--color-darkest);
+  fill: var(--color-darkest);
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+#app-debug {
+  display: none;
+}
+  
+.mdl-layout__header {
+  background: var(--color-lightest);
+}
+
+.mdl-layout__content {
+  background: var(--color-light);
+}
+
+.mdl-textfield {
+  flex-grow: 1
+}
+
+.mdl-layout__drawer {
+  border: none;
+}
+
+#app {
+  
+  .app__id {
+    font-family: 'Roboto Mono', monospace
+  }
+  
+  .app-drawer {
+    background: var(--color-dark);
+    color: var(--color-light);
+    
+    .app-profile {
+      display: flex;
+      flex-direction: column;
+      padding: 16px 40px;
+      @media screen and (max-width: 1024px) {
+        padding: 16px;
+      }
+      .app__id {
+        width: 100%;
+        overflow-wrap: break-word;
+      }
+    }
+    
+    .mdl-navigation__link {
+      color: var(--color-light);
+      &.active {
+        color: var(--color-lightest);
+        background: var(--color-darkest);
+        cursor: default;
+      }
+    }
+    
+    #app-channel-add {
+      color: var(--color-medium);
+    }
+  }
+  
+  .app-content {
+    
+    display: flex;
+    flex-direction: column;
+    
+    .app-chats {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      
+      p {
+        margin-bottom: 0.5em;
+        line-height: 1.2em;
+        font-size: 1.2em;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      .app-chat {
+        
+        margin-bottom: 1.25rem;
+        display: flex;
+        .app__avatar {
+          width: 3rem;
+          height: 3rem;
+          margin: 0 0.75rem;
+          background: --var(--color-darkest);
+        }
+        .app__id {
+          font-size: 0.65rem;
+          opacity: 0.5;
+          margin: 0;
+        }
+        
+        &.own {
+          
+          min-width: 10%;
+          margin: 0 0.5rem 1rem 3rem;
+          
+          display: flex;
+          
+          @media screen and (max-width: 1024px) {
+            justify-content: flex-end;
+            margin-left: 0.5rem;
+            p {
+              text-align: right;
+            }
+          }
+          
+          & > div {
+            background: var(--color-darkest);
+            color: var(--color-lightest);
+            padding: 1rem 1.2rem;
+            border-radius: 2rem;
+          }
+        }
+        
+      }
+      
+    }
+
+    .app-post {
+      
+      width: 100%;
+      padding: 0 1rem;
+      overflow-y: hidden;
+      
+      display: flex;
+      
+      background: var(--color-darkest);
+      color: var(--color-lightest);
+      border-bottom: 1px solid var(--color-dark);
+      
+      input {
+        border: none;
+      }
+      label {
+        color: var(--color-dark);
+      }
+      
+    }
+    
+    .app-info {
+      position: absolute;
+      z-index: 500;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--color-light);
+    }
+    
+    #app-channel-dialog {}
+    
+  }
+  
+}
