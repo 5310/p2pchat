@@ -1,0 +1,82 @@
+doctype html
+html(lang='en')
+  
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1.0, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+  meta(name='mobile-web-app-capable', content='yes')
+  meta(name='theme-color', content='#FFFFFF')    
+  link(rel='icon', type='image/png', sizes='512x512', href='_assets/favicon/512.png')
+  link(rel='icon', type='image/png', sizes='32x32', href='_assets/favicon/32.png')
+  link(rel='icon', type='image/png', sizes='16x16', href='_assets/favicon/16.png')
+  link(rel='manifest', href='manifest.webmanifest')
+  // TODO: Manifest file not handled by Parcel yet.
+  
+  link(rel='stylesheet', href='../node_modules/material-design-lite/material.grey-indigo.min.css')
+  script(src='../node_modules/material-design-lite/material.min.js')
+  link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    
+  title P2Pchat
+  link(rel='stylesheet', href='./index.css')
+  script(type='module', src='./index.js')
+    
+  body
+    
+    noscript
+      p This app needs JavaScript to work.
+      
+    main#app-content.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      
+      header.mdl-layout__header
+        .mdl-layout__header-row
+          span.app__channel-name.mdl-layout-title test-channel
+          .mdl-layout-spacer
+          nav.mdl-navigation
+            button#app-link-channel.mdl-button.mdl-js-button.mdl-button--icon
+              i.material-icons link
+            button#app-qrcode-channel.mdl-button.mdl-js-button.mdl-button--icon
+              i.material-icons share
+          button#app-channel-menu.mdl-button.mdl-js-button.mdl-button--icon
+            i.material-icons more_vert
+          ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='app-channel-menu')
+            li.mdl-menu__item Leave
+
+            
+      aside.mdl-layout__drawer        
+        header.app-profile.mdl-layout-title 
+          span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav          
+        main.app-channels
+          nav.app-channels.mdl-navigation
+            a.mdl-navigation__link(href='') channel-a
+            a.mdl-navigation__link(href='') lane-b
+            a.mdl-navigation__link(href='') canal-c
+            a.mdl-navigation__link(href='') frame-d
+            a.mdl-navigation__link(href='') add channel            
+        footer
+          nav.mdl-navigation
+            a.mdl-navigation__link(href='') about
+            
+      main.mdl-layout__content
+        //- .app-chat
+        //-   img.app__avatar
+        //-   h1.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
+        //-   p.app-chat__content hullo world
+        //- .app-chat
+        //-   img.app__avatar
+        //-   h1.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
+        //-   p.app-chat__content hullo world
+        //-   p.app-chat__content hullo world
+        //-   p.app-chat__content hullo world
+        //- .chat.own
+        //-   p.app-chat__content hullo world
+        //- .chat.own
+        //-   p.app-chat__content hullo world
+        //-   p.app-chat__content hullo world
+        //-   p.app-chat__content hullo world
+          
+      //- footer
+      //-   textfield#chat-input
+      //-   button#chat-send
+      
+    #app-debug
+      .node
+      .peers
