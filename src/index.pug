@@ -65,7 +65,7 @@ html(lang='en')
                
         footer
           nav.mdl-navigation
-            a.mdl-navigation__link(href='') About
+            a#app-about.mdl-navigation__link(href='') About
             
       main.app-content.mdl-layout__content
         
@@ -126,21 +126,12 @@ html(lang='en')
             p https://p2pchat.surge.sh/?c=channel-a
             .mdl-dialog__actions
               button.mdl-button.close(type='button') Done
-              
-    script
-      | const dialog = document.querySelector('#app-channel-dialog');
-      | const button = document.querySelector('#app-channel-join');
-      | const button2 = document.querySelector('#app-channel-join--text');
-      | if (! dialog.showModal) {
-      |  dialogPolyfill.registerDialog(dialog);
-      | }
-      | button.addEventListener('click', (ev) => {
-      |   dialog.showModal()
-      |   ev.preventDefault()
-      | })
-      | button2.addEventListener('click', (ev) => {
-      |   dialog.showModal()
-      |   ev.preventDefault()
-      | })
-      | dialog.querySelector('.close').addEventListener('click', () => dialog.close())
-      | dialog.querySelector('.submit').addEventListener('click', () => dialog.close())
+
+        dialog#app-about-dialog.mdl-dialog
+          h3.mdl-dialog__title About P2Pchat
+          .mdl-dialog__content
+            p P2Pchat is a peer-to-peer chat application made by Sayantan Chaudhuri for his masters degree.
+            p Yeah...
+            p It uses libp2p for networking, and is progressive web app, so go ahead, install it!
+            .mdl-dialog__actions
+              button.mdl-button.close(type='button') #TIL
