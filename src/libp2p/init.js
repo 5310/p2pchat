@@ -1,22 +1,10 @@
 import createNode from './create-node.js'
+import pify from 'pify'
 
 export default async function init () {
   const node = await createNode()
 
-  node.start((err) => {
-    if (err) return console.error('WebRTC not supported')
-
-    const idStr = node.peerInfo.id.toB58String()
-    console.log('Node is listening o/')
-
-    // DEBUG: Mock
-    const $id = document.createTextNode('Node is ready. ID: ' + idStr)
-    document.querySelector('#debug .debug__node').append($id)
-    const channel = 'test'
-    node.pubsub.subscribe(channel)
-    node.pubsub.on(channel, (msg) => console.log(msg.from, msg.data.toString()))
-    setInterval(() => node.pubsub.publish(channel, Buffer.from('Hullo!')), 1000)
-  })
+  node.peers = 0
 
   node.on('peer:discovery', (peerInfo) => {
     const idStr = peerInfo.id.toB58String()
@@ -33,12 +21,25 @@ export default async function init () {
     $connPeer.innerHTML = 'Connected to: ' + idStr
     $connPeer.id = idStr
     document.querySelector('#debug .debug__peers').append($connPeer)
+    node.peers++
   })
   node.on('peer:disconnect', (peerInfo) => {
     const idStr = peerInfo.id.toB58String()
     console.log('Lost connection to: ' + idStr)
     // DEBUG: Mock
     document.getElementById(idStr).remove()
+    node.peers--
+  })
+
+  await new Promise((resolve, reject) => {
+    node.start((err) => {
+      if (err) return console.error('WebRTC not supported')
+      console.log('Node is listening o/')
+      node.id = node.peerInfo.id.toB58String()
+      const $id = document.createTextNode('Node is ready. ID: ' + node.id)
+      document.querySelector('#debug .debug__node').append($id)
+      resolve()
+    })
   })
 
   return node
