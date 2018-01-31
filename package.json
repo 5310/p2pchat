@@ -26,6 +26,6 @@
     "dev": "parcel src/index.pug --https",
     "cachelist": "ls -1 dist | sed 's/^/  \"/g' | sed 's/$/\"/g' | sed '1s/^/[\\n/;$!s/$/,/;$s/$/\\n]/' > dist/cachelist.json",
     "build": "rm -rf dist/* && parcel build --no-minify --public-url / src/index.pug && yarn cachelist",
-    "deploy": "surge -p dist -d https://p2pchat.surge.sh"
+    "deploy": "surge dist https://p2pchat.surge.sh"
   }
 }
