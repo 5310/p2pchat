@@ -9,10 +9,7 @@ document.onreadystatechange = async function () {
 }
 
 // Redirect to secure:
-if (
-  location.protocol === 'http:' &&
-  document.location.host.split(':')[0] !== 'localhost'
-) location.protocol = 'https:'
+if (location.protocol === 'http:') location.protocol = 'https:'
 
 // Setup Service Worker:
 if ('serviceWorker' in navigator) {
