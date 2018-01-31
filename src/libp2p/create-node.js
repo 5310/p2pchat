@@ -5,7 +5,7 @@ import FloodSub from 'libp2p-floodsub'
 const createPeerInfo = pify(PeerInfo.create)
 
 export default async function createNode () {
-  const peerInfo = await createPeerInfo()
+  const peerInfo = await createPeerInfo() // TODO: Create a `peerid` with a static name for persistence
 
   const peerIdStr = peerInfo.id.toB58String()
   const ma = `/dns4/star-signal.cloud.ipfs.team/tcp/443/wss/p2p-webrtc-star/ipfs/${peerIdStr}`
