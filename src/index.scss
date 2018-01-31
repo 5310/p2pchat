@@ -38,7 +38,9 @@ a {
   color: inherit;
 }
 
-
+.hide {
+  display: none !important;
+}
   
 .mdl-layout__header {
   background: var(--color-lightest);
@@ -67,7 +69,7 @@ a {
   padding: 1rem;
 }
 
-#libp2p {
+#loading {
   position: absolute;
   z-index: 700;
   width: 100vw;
@@ -219,7 +221,7 @@ a {
       
     }
     
-    .app-info {
+    #app-channel-info {
       position: absolute;
       z-index: 500;
       width: 100%;

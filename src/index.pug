@@ -28,9 +28,9 @@ html(lang='en')
       p.debug__node
       p.debug__peers
 
-    aside#libp2p(style='display: none')
-      p.libp2p__status Initializing libp2p node
-      #libp2p-progress.mdl-progress.mdl-js-progress.mdl-progress__indeterminate
+    aside#loading
+      p.libp2p__status loading app
+      .mdl-progress.mdl-js-progress.mdl-progress__indeterminate
 
     main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
       
@@ -39,9 +39,9 @@ html(lang='en')
           span.app__channel-name.mdl-layout-title #channel-a
           .mdl-layout-spacer
           nav.mdl-navigation
-            button#app-link-channel.mdl-button.mdl-js-button.mdl-button--icon
+            a#app-link-channel.mdl-button.mdl-js-button.mdl-button--icon(href='', data-dialog-open='app-channel-qrcode-dialog')
               i.material-icons link
-          button#app-channel-menu.mdl-button.mdl-js-button.mdl-button--icon
+          a#app-channel-menu.mdl-button.mdl-js-button.mdl-button--icon
             i.material-icons more_vert
           ul.mdl-menu.mdl-menu--bottom-right.mdl-js-menu.mdl-js-ripple-effect(for='app-channel-menu')
             li#app-channel-leave.mdl-menu__item Leave
@@ -50,8 +50,9 @@ html(lang='en')
         
         header.app-profile.mdl-navigation__link
           img.app__avatar(src='')
-          .app__id.mdl-layout-title QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
-          .app__peercount Peers: 42
+          .app__id.mdl-layout-title 
+          div Peers: 
+            span.app__peercount 0
         
         main.app-channels
           nav.app-channels.mdl-navigation
@@ -59,13 +60,13 @@ html(lang='en')
             a.mdl-navigation__link(href='', data-app-channel-name='lane-b') #lane-b
             a.mdl-navigation__link(href='', data-app-channel-name='canal-c') #canal-c
             a.mdl-navigation__link(href='', data-app-channel-name='frame-d') #frame-d
-            a#app-channel-join.mdl-navigation__link(href='') Join Channel
+            a#app-channel-join.mdl-navigation__link(href='', data-dialog-open='app-channel-join-dialog') Join Channel
         
         .mdl-layout-spacer   
                
         footer
           nav.mdl-navigation
-            a#app-about.mdl-navigation__link(href='') About
+            a#app-about.mdl-navigation__link(href='', data-dialog-open='app-about-dialog') About
             
       main.app-content.mdl-layout__content
         
@@ -99,7 +100,7 @@ html(lang='en')
           button#app-post-send.mdl-button.mdl-js-button.mdl-button--icon
             i.material-icons send
     
-        aside.app-info(style='display: none;')
+        aside#app-channel-info(style='display: none;')
           p Please <a id='app-channel-join--text' class='mdl-navigation__link' href=''>join a channel</a> to get started.
           
         dialog#app-channel-join-dialog.mdl-dialog
@@ -116,7 +117,7 @@ html(lang='en')
               input.submit(type='submit', style='display: none')
             .mdl-dialog__actions
               button#app-channel-join-ok.mdl-button(type='button') Join
-              button.mdl-button.close(type='button') Cancel
+              button.mdl-button.close(type='button', data-dialog-close='app-channel-join-dialog') Cancel
               
         dialog#app-channel-qrcode-dialog.mdl-dialog
           h3.mdl-dialog__title Share a Channel
@@ -125,7 +126,7 @@ html(lang='en')
             img.app__qrcode
             p https://p2pchat.surge.sh/?c=channel-a
             .mdl-dialog__actions
-              button.mdl-button.close(type='button') Done
+              button.mdl-button.close(type='button', data-dialog-close='app-channel-qrcode-dialog') Done
 
         dialog#app-about-dialog.mdl-dialog
           h3.mdl-dialog__title About P2Pchat
@@ -134,4 +135,4 @@ html(lang='en')
             p Yeah...
             p It uses libp2p for networking, and is progressive web app, so go ahead, install it!
             .mdl-dialog__actions
-              button.mdl-button.close(type='button') #TIL
+              button.mdl-button.close(type='button', data-dialog-close='app-about-dialog') #TIL
