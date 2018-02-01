@@ -57,6 +57,21 @@ export default class App {
     })
 
     // TODO: Hook-up channel input
+    const $channelJoinName = document.getElementById('app-channel-name')
+    const $channelJoinKey = document.getElementById('app-channel-key')
+    const $channelJoinOk = document.getElementById('app-channel-join-ok')
+    $channelJoinOk.addEventListener('click', (ev) => {
+      this.joinChannel({name: $channelJoinName.value, key: $channelJoinKey.value})
+      $channelJoinName.value = ''
+      $channelJoinKey.value = ''
+    })
+    const simulateJoinDialogClosure = (ev) => {
+      if (ev.keyCode === 13) {
+        $channelJoinOk.click()
+      }
+    }
+    $channelJoinName.addEventListener('keyup', simulateJoinDialogClosure)
+    $channelJoinKey.addEventListener('keyup', simulateJoinDialogClosure)
   }
 
   joinChannel ({name, key}) {
@@ -92,7 +107,7 @@ export default class App {
 
       /* Channels */
 
-      document.getElementById('app-channel-name').innerText = '#' + this.activeChannel.name
+      document.getElementById('app-channel-label').innerText = '#' + this.activeChannel.name
 
       const $channels = document.querySelector('#app-channels .app-channels__contents')
       const $templateChannel = document.querySelector('template#app-channel')
