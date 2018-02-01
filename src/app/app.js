@@ -6,7 +6,7 @@ export default class App {
   constructor (node) {
     /* Actual app stuff */
     this.node = node
-    this.channels = new Set()
+    this.channels = new Set() // NOTE: Not really being used as such
     // TODO: Load channels from localStorage
     // TODO: Join channel frm query-string
     this.update()
@@ -75,8 +75,12 @@ export default class App {
   }
 
   joinChannel ({name, key}) {
-    this.activeChannel = new Channel({name, key})
-    if (!this.channels.has(this.activeChannel)) {
+    const match = Array.from(this.channels)
+      .filter((channel) =>
+        name === channel.name &&
+        key === channel.key)[0]
+    if (!match) {
+      this.activeChannel = new Channel({name, key})
       this.channels.add(this.activeChannel)
       // TODO: Save channels to localStorage
       this.node.pubsub.subscribe(this.activeChannel.code)
@@ -84,7 +88,7 @@ export default class App {
         this.activeChannel.code,
         (msg) => this.receivePost(Post.fromString(msg.data.toString()))
       )
-    }
+    } else this.activeChannel = match
     this.update()
   }
   leaveChannel () {
