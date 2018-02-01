@@ -162,6 +162,7 @@ export default class App {
         const $templateChatContent = document.querySelector('template#app-chat__content')
         $newestChat.querySelector('.app-chat__contents').appendChild(template($templateChatContent, post))
       }
+      $chats.querySelector('.app-chat:last-child').scrollIntoView()
     }
   }
 }
