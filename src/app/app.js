@@ -1,11 +1,18 @@
+import Post from './post'
+// import Channel from './channel'
+import template from './template'
+
 const namespace = 'space.scio.p2pchat'
 const $channelInfo = document.getElementById('app-channel-info')
 
 export default class App {
   constructor (node) {
+    /* Actual app stuff */
     this.node = node
+    this.channels = new Set()
+    this.update()
 
-    // Setup UI stuff
+    /* Setup UI stuff */
 
     // Hide loader
     document.getElementById('loading').classList.add('hide')
@@ -34,39 +41,57 @@ export default class App {
         ev.preventDefault()
       })
     )
-
-    // Actual app stuff
-
-    this.channels = new Set()
-    this.channels.add({name: 'test', key: 'test'}) // DEBUG:
-    // TODO: Load localStored channels list
-    this.activeChannel = Array.from(this.channels)[0]
-    this.render()
+  }
+  get activeChannelCode () {
+    return this.activeChannel ? namespace + this.activeChannel.name + this.activeChannel.key : undefined
   }
   joinChannel (channel) {
-    this.channels.add(channel)
     this.activeChannel = channel
-    // TODO: Save channels to localStorage
-    this.render()
+    if (!this.channels.has(channel)) {
+      this.channels.add(this.activeChannel)
+      // TODO: Save channels to localStorage
+      this.node.pubsub.subscribe(this.activeChannelCode)
+      this.node.pubsub.on(
+        this.activeChannelCode,
+        (msg) => this.receivePost(Post.fromString(msg.data.toString()))
+      )
+    }
+    this.update()
   }
   leaveChannel () {
     this.channels.remove(this.activeChannel)
     this.activeChannel = Array.from(this.channels)[0]
     // TODO: Save channels to localStorage
-    this.render()
+    this.update()
   }
-  render () {
+  update () {
     if (this.activeChannel) {
       $channelInfo.classList.remove('hide')
-      // DEBUG: Mock
-      const channel = namespace + this.activeChannel.name + this.activeChannel.key
-      this.node.pubsub.subscribe(channel)
-      this.node.pubsub.on(channel, (msg) => console.log(msg.from, msg.data.toString()))
-      setInterval(() => this.node.pubsub.publish(channel, Buffer.from('Hullo!')), 1000)
-      // TODO: render chats
-      // TODO: render channels
+      // TODO: update chats
+      // TODO: update channels
     } else $channelInfo.classList.add('hide')
   }
-  sendPost () {}
-  receivePost () {}
+  sendPost (post) {
+    if (this.activeChannel) {
+      this.node.pubsub.publish(
+        this.activeChannelCode,
+        Buffer.from(post.toString()),
+      )
+    }
+  }
+  receivePost (post) {
+    console.debug('Received:', post)
+    if (this.activeChannel) {
+      const $chats = document.getElementById('app-chats')
+      const $newestChat = $chats.querySelector('.app-chat:last-child')
+      if (!$newestChat || $newestChat.dataset.appChatId !== post.id) {
+        const $templateChat = document.querySelector('template#app-chat')
+        $chats.appendChild(template($templateChat, post))
+        if (post.id === this.node.id) $chats.querySelector('.app-chat:last-child').classList.add('own')
+      } else {
+        const $templateChatContent = document.querySelector('template#app-chat__content')
+        $newestChat.querySelector('.app-chat__contents').appendChild(template($templateChatContent, post))
+      }
+    }
+  }
 }

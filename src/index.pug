@@ -54,12 +54,10 @@ html(lang='en')
           div Peers: 
             span.app__peercount 0
         
-        main.app-channels
-          nav.app-channels.mdl-navigation
-            a.mdl-navigation__link.active(href='', data-app-channel-name='channel-a') #channel-a
-            a.mdl-navigation__link(href='', data-app-channel-name='lane-b') #lane-b
-            a.mdl-navigation__link(href='', data-app-channel-name='canal-c') #canal-c
-            a.mdl-navigation__link(href='', data-app-channel-name='frame-d') #frame-d
+        main#app-channels
+          nav.mdl-navigation
+            div.app-channels__contents
+              //- Channel entries here!
             a#app-channel-join.mdl-navigation__link(href='', data-dialog-open='app-channel-join-dialog') Join Channel
         
         .mdl-layout-spacer   
@@ -68,30 +66,12 @@ html(lang='en')
           nav.mdl-navigation
             a#app-about.mdl-navigation__link(href='', data-dialog-open='app-about-dialog') About
             
-      main.app-content.mdl-layout__content
+      main#app-content.mdl-layout__content
         
-        main.app-chats
+        main#app-chats
           .mdl-layout-spacer
-          .app-chat
-            img.app__avatar(src='')
-            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
-              span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
-              p.app-chat__content hullo world main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer main#app.mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-drawer
-          .app-chat
-            img.app__avatar(src='')
-            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
-              span.app__id QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav
-              p.app-chat__content hullo world
-              p.app-chat__content hullo world
-              p.app-chat__content hullo world
-          .app-chat.own
-            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
-              p.app-chat__content hullo world
-          .app-chat.own
-            div(data-app-chat-id='QmUhXzHUeFirNVqwHXP8oCn9EgZ6UQpjbPk94AVp7j1mav')
-              p.app-chat__content hullo world hullo worldhullo worldhullohullo worldhullo worldhullo worldhullo worldhullo worldhullo worldhullo worldhullo world
-              p.app-chat__content hullo world
-              p.app-chat__content hullo world
+          .app-chats__contents
+          //- Chat posts go here!
 
         footer.app-post.mdl-layout__header-row
           .mdl-textfield.mdl-js-textfield
@@ -136,3 +116,23 @@ html(lang='en')
             p It uses libp2p for networking, and is progressive web app, so go ahead, install it!
             .mdl-dialog__actions
               button.mdl-button.close(type='button', data-dialog-close='app-about-dialog') #TIL
+
+        template#app-chat
+          .app-chat(data-bind_dataset.app-chat-id='id' data-app-chat-id='')
+            img.app__avatar(src='')
+            div
+              span.app__id(data-bind_inner-text='id')
+              .app-chat__contents
+                p.app-chat__content(data-bind_inner-text='content')
+              
+        template#app-chat__content
+          p.app-chat__content(data-bind_inner-text='content')
+            
+        template#app-channel        
+          a.app-channel.mdl-navigation__link(
+            href='', 
+            data-bind_dataset.app-channel-name='name', 
+            data-app-channel-name='',
+            data-bind_dataset.app-channel-key='key', 
+            data-app-channel-key=''
+          )

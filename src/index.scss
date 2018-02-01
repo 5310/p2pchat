@@ -131,12 +131,12 @@ a {
     }
   }
   
-  .app-content {
+  #app-content {
     
     display: flex;
     flex-direction: column;
     
-    .app-chats {
+    #app-chats {
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -173,6 +173,10 @@ a {
         }
         
         &.own {
+          
+          .app__avatar, .app__id {
+            display: none;
+          }
           
           min-width: 10%;
           margin: 0 0.75rem 1rem 3rem;
