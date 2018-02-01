@@ -50,7 +50,7 @@ export default class App {
       $postInput.focus()
       ev.preventDefault()
     })
-    $postInput.addEventListener('keyup', (ev) => {
+    $postInput.addEventListener('keydown', (ev) => {
       if (ev.keyCode === 13) {
         $postSend.click()
       }
@@ -70,8 +70,8 @@ export default class App {
         $channelJoinOk.click()
       }
     }
-    $channelJoinName.addEventListener('keyup', simulateJoinDialogClosure)
-    $channelJoinKey.addEventListener('keyup', simulateJoinDialogClosure)
+    $channelJoinName.addEventListener('keydown', simulateJoinDialogClosure)
+    $channelJoinKey.addEventListener('keydown', simulateJoinDialogClosure)
   }
 
   joinChannel ({name, key}) {
