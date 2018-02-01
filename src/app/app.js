@@ -1,4 +1,5 @@
 import Post from './post'
+import Channel from './channel'
 import template from './template'
 
 export default class App {
@@ -58,9 +59,9 @@ export default class App {
     // TODO: Hook-up channel input
   }
 
-  joinChannel (channel) {
-    this.activeChannel = channel
-    if (!this.channels.has(channel)) {
+  joinChannel ({name, key}) {
+    this.activeChannel = new Channel({name, key})
+    if (!this.channels.has(this.activeChannel)) {
       this.channels.add(this.activeChannel)
       // TODO: Save channels to localStorage
       this.node.pubsub.subscribe(this.activeChannel.code)

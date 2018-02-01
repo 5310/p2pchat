@@ -4,8 +4,8 @@ import Channel from './channel'
 
 export default function init (node) {
   const app = new App(node)
-  app.joinChannel(new Channel({ name: 'global', key: '' }))
-  app.joinChannel(new Channel({ name: 'test', key: 'test' }))
+  app.joinChannel({ name: 'global', key: '' })
+  app.joinChannel({ name: 'test', key: 'test' })
   setInterval(
     () => app.sendPost(new Post({ content: Date.now() })),
     5000
