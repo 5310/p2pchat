@@ -7,6 +7,7 @@ export default class App {
     this.node = node
     this.channels = new Set()
     // TODO: Load channels from localStorage
+    // TODO: Join channel frm query-string
     this.update()
 
     /* Setup UI stuff */
@@ -38,6 +39,10 @@ export default class App {
         ev.preventDefault()
       })
     )
+
+    // TODO: Hook-up chat posts
+
+    // TODO: Hook-up channel input
   }
 
   joinChannel (channel) {
