@@ -88,14 +88,12 @@ html(lang='en')
             p If no channel with the given name and key exists yet one will be created for you.
             form(action='#')
               .mdl-textfield.mdl-js-textfield
-                input#app-channel-name.mdl-textfield__input(type='text')
-                label.mdl-textfield__label(for='app-channel-name') Name...
+                input#app-channel-name.mdl-textfield__input(type='text', placeholder="Name...", autofocus)
               .mdl-textfield.mdl-js-textfield
-                input#app-channel-key.mdl-textfield__input(type='password')
-                label.mdl-textfield__label(for='app-channel-key') Key...
+                input#app-channel-key.mdl-textfield__input(type='password', placeholder="Key...")
               input.submit(type='submit', style='display: none')
             .mdl-dialog__actions
-              button#app-channel-join-ok.mdl-button(type='button') Join
+              button#app-channel-join-ok.mdl-button(type='button', data-dialog-close='app-channel-join-dialog') Join
               button.mdl-button.close(type='button', data-dialog-close='app-channel-join-dialog') Cancel
               
         dialog#app-channel-qrcode-dialog.mdl-dialog
