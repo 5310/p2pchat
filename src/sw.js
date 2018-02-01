@@ -1,7 +1,7 @@
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open('index')
-      .then((cache) => fetch('cachelist.json')
+      .then((cache) => fetch('parcel-manifest.json')
         .then((response) => response.json())
         .then((files) => cache.addAll(files))
       )
