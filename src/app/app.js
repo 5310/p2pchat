@@ -40,7 +40,20 @@ export default class App {
       })
     )
 
-    // TODO: Hook-up chat posts
+    // // Hook-up chat posts
+    const $postInput = document.getElementById('app-post-input')
+    const $postSend = document.getElementById('app-post-send')
+    $postSend.addEventListener('click', (ev) => {
+      this.sendPost({ content: $postInput.value })
+      $postInput.value = ''
+      $postInput.focus()
+      ev.preventDefault()
+    })
+    $postInput.addEventListener('keyup', (ev) => {
+      if (ev.keyCode === 13) {
+        $postSend.click()
+      }
+    })
 
     // TODO: Hook-up channel input
   }
@@ -68,11 +81,11 @@ export default class App {
   update () {
     if (this.activeChannel) {
       /* Chats */
-
       document.getElementById('app-channel-info').classList.remove('hide')
 
       const $chats = document.querySelector('#app-chats .app-chats__contents')
       $chats.innerHTML = ''
+      document.getElementById('app-post-input').focus()
 
       // TODO: Load chats from localStorage
 
@@ -105,12 +118,11 @@ export default class App {
     } else document.getElementById('app-channel-info').classList.add('hide')
   }
 
-  sendPost (post) {
+  sendPost ({ id = this.node.id, code = this.activeChannel.code, content }) {
     if (this.activeChannel) {
-      post.code = this.activeChannel.code
       this.node.pubsub.publish(
         this.activeChannel.code,
-        Buffer.from(post.toString()),
+        Buffer.from(new Post({ id, code, content }).toString()),
       )
     }
   }

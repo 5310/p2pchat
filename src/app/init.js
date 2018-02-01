@@ -7,7 +7,7 @@ export default function init (node) {
   app.joinChannel(new Channel({ name: 'global', key: '' }))
   app.joinChannel(new Channel({ name: 'test', key: 'test' }))
   setInterval(
-    () => app.sendPost(new Post({ id: app.node.id, content: Date.now() })),
+    () => app.sendPost(new Post({ content: Date.now() })),
     5000
   ) // DEBUG: Mock
   return app
