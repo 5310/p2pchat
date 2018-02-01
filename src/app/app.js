@@ -41,7 +41,7 @@ export default class App {
       })
     )
 
-    // // Hook-up chat posts
+    // Hook-up chat posts
     const $postInput = document.getElementById('app-post-input')
     const $postSend = document.getElementById('app-post-send')
     $postSend.addEventListener('click', (ev) => {
@@ -56,7 +56,7 @@ export default class App {
       }
     })
 
-    // TODO: Hook-up channel input
+    // Hook-up channel input
     const $channelJoinName = document.getElementById('app-channel-name')
     const $channelJoinKey = document.getElementById('app-channel-key')
     const $channelJoinOk = document.getElementById('app-channel-join-ok')
