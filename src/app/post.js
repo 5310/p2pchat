@@ -3,6 +3,7 @@ export default class Post {
     if (post) {
       this.id = post.id
       this.content = post.content
+      this.code = post.code
       // NOTE: timestamp?
     }
   }

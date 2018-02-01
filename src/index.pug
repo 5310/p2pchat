@@ -36,7 +36,7 @@ html(lang='en')
       
       header.app-header.mdl-layout__header
         .mdl-layout__header-row
-          span.app__channel-name.mdl-layout-title #channel-a
+          span#app-channel-name.mdl-layout-title #channel-a
           .mdl-layout-spacer
           nav.mdl-navigation
             a#app-link-channel.mdl-button.mdl-js-button.mdl-button--icon(href='', data-dialog-open='app-channel-qrcode-dialog')
@@ -130,9 +130,10 @@ html(lang='en')
             
         template#app-channel        
           a.app-channel.mdl-navigation__link(
-            href='', 
+            href='',
             data-bind_dataset.app-channel-name='name', 
             data-app-channel-name='',
             data-bind_dataset.app-channel-key='key', 
             data-app-channel-key=''
-          )
+          ) #
+            span(data-bind_inner-text='name')

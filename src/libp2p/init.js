@@ -1,5 +1,4 @@
 import createNode from './create-node.js'
-import pify from 'pify'
 
 export default async function init () {
   const node = await createNode()

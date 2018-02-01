@@ -1,15 +1,12 @@
 import Post from './post'
-// import Channel from './channel'
 import template from './template'
-
-const namespace = 'space.scio.p2pchat'
-const $channelInfo = document.getElementById('app-channel-info')
 
 export default class App {
   constructor (node) {
     /* Actual app stuff */
     this.node = node
     this.channels = new Set()
+    // TODO: Load channels from localStorage
     this.update()
 
     /* Setup UI stuff */
@@ -42,17 +39,15 @@ export default class App {
       })
     )
   }
-  get activeChannelCode () {
-    return this.activeChannel ? namespace + this.activeChannel.name + this.activeChannel.key : undefined
-  }
+
   joinChannel (channel) {
     this.activeChannel = channel
     if (!this.channels.has(channel)) {
       this.channels.add(this.activeChannel)
       // TODO: Save channels to localStorage
-      this.node.pubsub.subscribe(this.activeChannelCode)
+      this.node.pubsub.subscribe(this.activeChannel.code)
       this.node.pubsub.on(
-        this.activeChannelCode,
+        this.activeChannel.code,
         (msg) => this.receivePost(Post.fromString(msg.data.toString()))
       )
     }
@@ -64,25 +59,63 @@ export default class App {
     // TODO: Save channels to localStorage
     this.update()
   }
+
   update () {
     if (this.activeChannel) {
-      $channelInfo.classList.remove('hide')
-      // TODO: update chats
-      // TODO: update channels
-    } else $channelInfo.classList.add('hide')
+      /* Chats */
+
+      document.getElementById('app-channel-info').classList.remove('hide')
+
+      const $chats = document.querySelector('#app-chats .app-chats__contents')
+      $chats.innerHTML = ''
+
+      // TODO: Load chats from localStorage
+
+      /* Channels */
+
+      document.getElementById('app-channel-name').innerText = '#' + this.activeChannel.name
+
+      const $channels = document.querySelector('#app-channels .app-channels__contents')
+      const $templateChannel = document.querySelector('template#app-channel')
+      $channels.innerHTML = ''
+      Array.from(this.channels).forEach((channel) => {
+        $channels.appendChild(template($templateChannel, channel))
+      })
+      $channels.querySelector(
+        `[data-app-channel-name="${this.activeChannel.name}"][data-app-channel-key="${this.activeChannel.key}"]`
+      ).classList.add('active')
+      Array.from($channels.querySelectorAll('.app-channel')).forEach(($e) =>
+        $e.addEventListener('click', (ev) => {
+          const channel = Array.from(this.channels)
+            .filter((channel) =>
+              ev.target.dataset.appChannelName === channel.name &&
+              ev.target.dataset.appChannelKey === channel.key)[0]
+          this.joinChannel(channel)
+          ev.preventDefault()
+          // Simulates sidebar closure
+          const $obfuscator = document.querySelector('.mdl-layout__obfuscator')
+          if ($obfuscator.classList.contains('is-visible')) { document.querySelector('.mdl-layout__obfuscator').click() }
+        })
+      )
+    } else document.getElementById('app-channel-info').classList.add('hide')
   }
+
   sendPost (post) {
     if (this.activeChannel) {
+      post.code = this.activeChannel.code
       this.node.pubsub.publish(
-        this.activeChannelCode,
+        this.activeChannel.code,
         Buffer.from(post.toString()),
       )
     }
   }
+
   receivePost (post) {
     console.debug('Received:', post)
-    if (this.activeChannel) {
-      const $chats = document.getElementById('app-chats')
+    // TODO: localStore chats
+    // Render chat
+    if (this.activeChannel && this.activeChannel.code === post.code) {
+      const $chats = document.querySelector('#app-chats .app-chats__contents')
       const $newestChat = $chats.querySelector('.app-chat:last-child')
       if (!$newestChat || $newestChat.dataset.appChatId !== post.id) {
         const $templateChat = document.querySelector('template#app-chat')
