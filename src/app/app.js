@@ -5,13 +5,14 @@ import template from './template'
 export default class App {
   constructor (node) {
     /* Actual app stuff */
+
     this.node = node
-    this.channels = new Set() // NOTE: Not really being used as such
+
+    this.channels = new Set() // NOTE: Not really being used as a set much
     const channels = JSON.parse(window.localStorage.getItem('channels')) || [new Channel({name: 'global', key: ''})]
     const activeChannel = JSON.parse(window.localStorage.getItem('activeChannel'))
     channels.forEach((channel) => this.joinChannel(channel))
     if (activeChannel) this.joinChannel(activeChannel)
-    // TODO: Join channel from query-string
 
     this.update()
 
