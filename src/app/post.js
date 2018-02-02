@@ -4,7 +4,7 @@ export default class Post {
       this.id = post.id
       this.content = post.content
       this.code = post.code
-      // NOTE: timestamp?
+      // NOTE: Consider timestamp?
     }
   }
   toString () {

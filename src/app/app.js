@@ -107,7 +107,7 @@ export default class App {
       $chats.innerHTML = ''
       document.getElementById('app-post-input').focus()
 
-      // TODO: Load chats from localStorage
+      // NOTE: Load history?
 
       /* Channels */
 
@@ -149,7 +149,7 @@ export default class App {
 
   receivePost (post) {
     console.debug('Received:', post)
-    // TODO: localStore chats
+    // NOTE: localStore history?
     // Render chat
     if (this.activeChannel && this.activeChannel.code === post.code) {
       const $chats = document.querySelector('#app-chats .app-chats__contents')

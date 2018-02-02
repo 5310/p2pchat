@@ -14,7 +14,7 @@ export default class Node extends libp2p {
       ],
       connection: {
         muxer: [Multiplex],
-        crypto: [SECIO], // NOTE: Can be removed to simplify the prohect :]
+        crypto: [SECIO], // NOTE: Can be removed to simplify the project :]
       },
       discovery: [
         wstar.discovery,
