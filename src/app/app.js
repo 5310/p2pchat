@@ -7,8 +7,12 @@ export default class App {
     /* Actual app stuff */
     this.node = node
     this.channels = new Set() // NOTE: Not really being used as such
-    // TODO: Load channels from localStorage
-    // TODO: Join channel frm query-string
+    const channels = JSON.parse(window.localStorage.getItem('channels')) || [new Channel({name: 'global', key: ''})]
+    const activeChannel = JSON.parse(window.localStorage.getItem('activeChannel'))
+    channels.forEach((channel) => this.joinChannel(channel))
+    if (activeChannel) this.joinChannel(activeChannel)
+    // TODO: Join channel from query-string
+
     this.update()
 
     /* Setup UI stuff */
@@ -82,7 +86,6 @@ export default class App {
     if (!match) {
       this.activeChannel = new Channel({name, key})
       this.channels.add(this.activeChannel)
-      // TODO: Save channels to localStorage
       this.node.pubsub.subscribe(this.activeChannel.code)
       this.node.pubsub.on(
         this.activeChannel.code,
@@ -93,8 +96,7 @@ export default class App {
   }
   leaveChannel () {
     this.channels.remove(this.activeChannel)
-    this.activeChannel = Array.from(this.channels)[0]
-    // TODO: Save channels to localStorage
+    this.activeChannel = Array.from(this.channels).pop()
     this.update()
   }
 
@@ -110,6 +112,9 @@ export default class App {
       // NOTE: Load history?
 
       /* Channels */
+
+      window.localStorage.setItem('channels', JSON.stringify(Array.from(this.channels)))
+      window.localStorage.setItem('activeChannel', JSON.stringify(this.activeChannel))
 
       document.getElementById('app-channel-label').innerText = '#' + this.activeChannel.name
 
