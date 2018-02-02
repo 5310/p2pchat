@@ -60,7 +60,7 @@ export default class App {
       }
     })
 
-    // Hook-up channel input
+    // Hook-up channel joining
     const $channelJoinName = document.getElementById('app-channel-name')
     const $channelJoinKey = document.getElementById('app-channel-key')
     const $channelJoinOk = document.getElementById('app-channel-join-ok')
@@ -76,6 +76,10 @@ export default class App {
     }
     $channelJoinName.addEventListener('keydown', simulateJoinDialogClosure)
     $channelJoinKey.addEventListener('keydown', simulateJoinDialogClosure)
+
+    // Hook-up channel leaving
+    const $channelLeave = document.getElementById('app-channel-leave')
+    $channelLeave.addEventListener('click', (ev) => this.leaveChannel(this.activeChannel))
   }
 
   joinChannel ({name, key}) {
@@ -94,9 +98,15 @@ export default class App {
     } else this.activeChannel = match
     this.update()
   }
-  leaveChannel () {
-    this.channels.remove(this.activeChannel)
-    this.activeChannel = Array.from(this.channels).pop()
+  leaveChannel ({name, key}) {
+    const match = Array.from(this.channels)
+      .filter((channel) =>
+        name === channel.name &&
+        key === channel.key)[0]
+    if (match) {
+      this.channels.delete(match)
+      this.activeChannel = Array.from(this.channels).pop()
+    }
     this.update()
   }
 
