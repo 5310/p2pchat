@@ -48,7 +48,7 @@ html(lang='en')
       aside.app-drawer.mdl-layout__drawer
         
         header.app-profile.mdl-navigation__link
-          img.app__avatar(src='')
+          img.app__avatar
           .app__id.mdl-layout-title 
           div Peers: 
             span.app__peercount 0
@@ -115,7 +115,7 @@ html(lang='en')
 
         template#app-chat
           .app-chat(data-bind_dataset.app-chat-id='id' data-app-chat-id='')
-            img.app__avatar(src='')
+            img.app__avatar(data-bind_src='avatar')
             div
               span.app__id(data-bind_inner-text='id')
               .app-chat__contents

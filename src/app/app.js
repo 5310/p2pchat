@@ -28,6 +28,7 @@ export default class App {
     }
     this.node.on('peer:connect', updatePeers)
     this.node.on('peer:disconnect', updatePeers)
+    $profile.querySelector('.app__avatar').src = Post.generateAvatar(this.node.id)
 
     // Hook-up dialogs
     Array.from(document.querySelectorAll('[data-dialog-open]')).forEach(($e) =>

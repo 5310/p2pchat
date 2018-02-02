@@ -38,6 +38,12 @@ a {
   color: inherit;
 }
 
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hide {
   display: none !important;
 }
@@ -107,6 +113,8 @@ a {
         width: 4rem;
         height: 4rem;
         margin: 1rem 0;
+        background: var(--color-darkest);
+        border-radius: 50%;
       }
       .app__id {
         width: 100%;
@@ -164,7 +172,8 @@ a {
           width: 3rem;
           height: 3rem;
           margin: 0 0.75rem;
-          background: --var(--color-darkest);
+          background: var(--color-darkest);
+          border-radius: 50%;
         }
         .app__id {
           font-size: 0.65rem;
