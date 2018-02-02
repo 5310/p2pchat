@@ -10,6 +10,8 @@ html(lang='en')
   link(rel='icon', type='image/png', sizes='16x16', href='_assets/favicon/16.png')
   link(rel='manifest', href='manifest.webmanifest')
   
+  link(rel='stylesheet', href='../node_modules/dialog-polyfill/dialog-polyfill.css')
+    
   link(rel='stylesheet', href='../node_modules/material-design-lite/dist/material.grey-indigo.min.css')
   script(src='../node_modules/material-design-lite/material.min.js')
   link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
@@ -133,3 +135,5 @@ html(lang='en')
             data-app-channel-key=''
           ) #
             span(data-bind_inner-text='name')
+        
+      script(type='module', src='./polyfills.js')

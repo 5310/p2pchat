@@ -13,6 +13,7 @@
     "parcel-plugin-pug": "^0.2.4"
   },
   "dependencies": {
+    "dialog-polyfill": "^0.4.9",
     "identicon.js": "^2.3.1",
     "libp2p": "^0.15.2",
     "libp2p-floodsub": "^0.13.1",
@@ -27,9 +28,9 @@
   },
   "scripts": {
     "postinstall": "cd node_modules/parcel-bundler && yarn install && yarn build; cd ../..",
-    "dev": "parcel src/index.pug --https",
+    "dev": "parcel --https --public-url ./ src/index.pug",
     "cachelist": "ls -1 dist | sed 's/^/  \"/g' | sed 's/$/\"/g' | sed '1s/^/[\\n/;$!s/$/,/;$s/$/\\n]/' > dist/cachelist.json",
-    "build": "rm -rf dist/* && parcel build --no-minify --public-url / src/index.pug",
+    "build": "rm -rf dist/* && parcel build --no-minify --public-url ./ src/index.pug",
     "deploy": "surge dist https://p2pchat.surge.sh"
   }
 }
