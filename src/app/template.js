@@ -15,6 +15,8 @@ function setPropertyRecursively (object, properties, value) {
 }
 
 export default function template ($template, data) {
+  if ($template.tagName !== 'TEMPLATE') throw new Error('Template element invalid.')
+
   const element = $template.content.cloneNode(true)
   const treeWalker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, () => NodeFilter.FILTER_ACCEPT)
 
