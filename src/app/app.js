@@ -14,7 +14,7 @@ export default class App {
     channels.forEach((channel) => this.joinChannel(channel))
     if (activeChannel) this.joinChannel(activeChannel)
 
-    this.update()
+    this.updateChannels()
 
     /* Setup UI stuff */
 
@@ -98,7 +98,7 @@ export default class App {
         (msg) => this.receivePost(Post.fromString(msg.data.toString()))
       )
     } else this.activeChannel = match
-    this.update()
+    this.updateChannels()
   }
   leaveChannel ({name, key}) {
     const match = Array.from(this.channels)
@@ -109,10 +109,10 @@ export default class App {
       this.channels.delete(match)
       this.activeChannel = Array.from(this.channels).pop()
     }
-    this.update()
+    this.updateChannels()
   }
 
-  update () {
+  updateChannels () {
     if (this.activeChannel) {
       /* Chats */
       document.getElementById('app-channel-info').classList.remove('hide')
