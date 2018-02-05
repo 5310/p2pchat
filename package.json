@@ -28,7 +28,8 @@
   },
   "scripts": {
     "postinstall": "cd node_modules/parcel-bundler && yarn install && yarn build; cd ../..",
-    "dev": "parcel --https --public-url ./ src/index.pug",
+    "test": "parcel --https --public-url src/test.js",
+    "dev": "parcel --https --public-url src/index.pug",
     "cachelist": "ls -1 dist | sed 's/^/  \"/g' | sed 's/$/\"/g' | sed '1s/^/[\\n/;$!s/$/,/;$s/$/\\n]/' > dist/cachelist.json",
     "build": "rm -rf dist/* && parcel build --no-minify --public-url ./ src/index.pug",
     "deploy": "surge dist https://p2pchat.surge.sh"
