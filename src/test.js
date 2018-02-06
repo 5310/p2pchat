@@ -1,5 +1,4 @@
 import Node from './libp2p/node.js'
-import createNode from './libp2p/create-node.js'
 
 import template from './app/template.js'
 
@@ -11,9 +10,9 @@ console.log(321)
 
 export default async function test () {
   // libp2p
-  const node = await createNode()
-  console.assert(node instanceof Node, 'createNode() failed to be created')
-  console.assert(node.isStarted(), 'createNode() faield to start')
+  const node = await Node.create()
+  console.assert(node instanceof Node, 'Node failed to be created')
+  console.assert(node.isStarted(), 'Node failed to start')
   // template
   const $templated = template(Document.createElement('template'), {})
   console.assert($templated instanceof HTMLElement, 'template() failed to stamp a DOM element')
