@@ -1,6 +1,6 @@
 import Post from './post'
 import Channel from './channel'
-import template from './template'
+import template from '../template'
 
 export default class App {
   constructor (node) {
