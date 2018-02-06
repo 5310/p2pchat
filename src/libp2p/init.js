@@ -1,7 +1,7 @@
-import createNode from './create-node.js'
+import Node from './node.js'
 
 export default async function init () {
-  const node = await createNode()
+  const node = await Node.create()
 
   node.peers = 0
 
